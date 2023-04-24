@@ -1,10 +1,8 @@
 # streamlit_audio_recorder by stefanrmmr (rs. analytics) - version January 2023
 
-from coughDetectionModel import predict2_xTest
-
+from coughDetectionModel import predict_xTest
+import os
 import streamlit as st
-import numpy as np
-from datetime import datetime
 from st_custom_components import st_audiorec
 import wave
 
@@ -42,6 +40,11 @@ def audiorec_demo_app():
     # by calling this function an instance of the audio recorder is created
     # once a recording is completed, audio data will be saved to wav_audio_data
 
+    try:
+        os.remove(rec_sound_filepath)
+    except OSError:
+        pass
+
     wav_bytes = st_audiorec() # tadaaaa! yes, that's it! :D
 
     # add some spacing and informative messages
@@ -60,21 +63,21 @@ def audiorec_demo_app():
         # fc.LeftRightCheck.run()
         # display audio data as received on the Python side
 
-        with wave.open("rec_sound.wav", "w") as f:
-            # 2 Channels.
-            print("\nNew File Created at {}\n".format(datetime.now()))
-            f.setnchannels(2)
-            # # 2 bytes per sample.
-            f.setsampwidth(2)
-            f.setframerate(44100)
-            f.writeframes(wav_bytes)
-            f.close()
+
+        f = wave.open("rec_sound.wav", "w")
+        # 2 Channels.
+        f.setnchannels(1)
+        # # 2 bytes per sample.
+        f.setsampwidth(1)
+        f.setframerate(22050)
+        f.writeframes(wav_bytes)
+        f.close()
 
         # wave_obj = sa.WaveObject.from_wave_file(rec_sound_filepath)
         # play_obj = wave_obj.play()
         # play_obj.wait_done()
         # model = runCD_Train()
-        result = predict2_xTest(rec_sound_filepath)
+        result = predict_xTest(rec_sound_filepath)
         st.write(result)
 
         # st.write(prediction)

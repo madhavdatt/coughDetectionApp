@@ -1,9 +1,10 @@
+import streamlit.components.v1 as components
 import os
 import numpy as np
 import streamlit as st
 from io import BytesIO
-from scipy.io.wavfile import write
-import streamlit.components.v1 as components
+from datetime import datetime
+
 
 def st_audiorec():
 
@@ -29,7 +30,7 @@ def st_audiorec():
     if isinstance(raw_audio_data, dict):  # retrieve audio data
 
         with st.spinner('retrieving audio-recording...'):
-
+            
             ind, raw_audio_data = zip(*raw_audio_data['arr'].items())
 
             ind = np.array(ind, dtype=int)  # convert to np array
@@ -40,6 +41,9 @@ def st_audiorec():
 
             # wav_bytes contains audio data in byte format, ready to be processed further
             wav_bytes = stream.read()
+            
+            stream.close()
 
+            print("\nNew File Created at {}\n".format(datetime.now()))
 
     return wav_bytes
