@@ -41,9 +41,7 @@ def st_audiorec():
 
             # wav_bytes contains audio data in byte format, ready to be processed further
             wav_bytes = stream.read()
-            
-            stream.close()
 
-            print("\nNew File Created at {}\n".format(datetime.now()))
+            print("New File Created at {}\n".format(datetime.now()))
 
     return wav_bytes
