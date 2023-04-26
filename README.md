@@ -1,3 +1,3 @@
-- Download training audio from link (https://1drv.ms/f/s!AjWVWtWhmYVShPMiU8xnsqtAcgbYXQ?e=mk1bcf)
+- Download training audio from link (https://1drv.ms/f/s!AjWVWtWhmYVShPRtcY-cvTTCK3YUwg)
 - Change trainingDataDirectory to specify path for above training audio folder 
 - Change rec_sound_filepath to specify filepath for 'rec_audio.wav'
